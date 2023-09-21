@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
-import 'package:video_player/video_player.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -17,17 +16,15 @@ class HalamanProfil extends StatefulWidget {
 
 class _HalamanProfilState extends State<HalamanProfil>
     with SingleTickerProviderStateMixin {
-  late VideoPlayerController videoPlayerController;
   late AnimationController animationController;
 
   @override
   void initState() {
     super.initState();
-    videoPlayerController =
-        VideoPlayerController.asset('../assets/video/background_video.mp4');
-    videoPlayerController.initialize().then((_) {
-      setState(() {});
-    });
+    // videoPlayerController = VideoPlayerController.asset('../assets/video/background_video.mp4');
+    // videoPlayerController.initialize().then((_) {
+    //   setState(() {});
+    // });
 
     animationController = AnimationController(
       vsync: this,
@@ -46,7 +43,6 @@ class _HalamanProfilState extends State<HalamanProfil>
   @override
   void dispose() {
     super.dispose();
-    videoPlayerController.dispose();
     animationController.dispose();
   }
 
@@ -68,23 +64,9 @@ class _HalamanProfilState extends State<HalamanProfil>
       home: Scaffold(
         body: Stack(
           children: [
-            SizedBox.expand(
+            const SizedBox.expand(
               child: FittedBox(
                 fit: BoxFit.cover,
-                child: SizedBox(
-                  width: videoPlayerController.value.size.width,
-                  height: videoPlayerController.value.size.height,
-                  child: Chewie(
-                    controller: ChewieController(
-                      videoPlayerController: videoPlayerController,
-                      autoInitialize: true,
-                      looping: true,
-                      allowedScreenSleep: false,
-                      autoPlay: true,
-                      showControls: false,
-                    ),
-                  ),
-                ),
               ),
             ),
             Center(
@@ -92,7 +74,8 @@ class _HalamanProfilState extends State<HalamanProfil>
                 animation: animationController,
                 builder: (BuildContext context, Widget? child) {
                   return Transform.translate(
-                    offset: Offset(0.0, 5.0 * (1.0 - animationController.value)),
+                    offset:
+                        Offset(0.0, 5.0 * (1.0 - animationController.value)),
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxHeight: 550),
                       child: Container(
@@ -111,7 +94,8 @@ class _HalamanProfilState extends State<HalamanProfil>
                           children: [
                             const CircleAvatar(
                               radius: 100,
-                              backgroundImage: AssetImage('../assets/img/foto_profile.jpg'),
+                              backgroundImage:
+                                  AssetImage('../assets/img/foto_profile.jpg'),
                             ),
                             const SizedBox(height: 20),
                             const Text(
@@ -125,7 +109,8 @@ class _HalamanProfilState extends State<HalamanProfil>
                             ),
                             const SizedBox(height: 12),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 6),
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey[800],
                                 borderRadius: BorderRadius.circular(8),
@@ -143,7 +128,8 @@ class _HalamanProfilState extends State<HalamanProfil>
                             Flexible(
                               child: SingleChildScrollView(
                                 child: Container(
-                                  margin: const EdgeInsets.symmetric(horizontal: 18),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 18),
                                   child: const Text(
                                     'Saya seorang mahasiswa Universitas Sam Ratulangi dan sedang belajar di Unity Divisi Mobile Development',
                                     textAlign: TextAlign.center,
@@ -161,7 +147,8 @@ class _HalamanProfilState extends State<HalamanProfil>
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    _launchURL('https://www.facebook.com/your_facebook_page');
+                                    _launchURL(
+                                        'https://www.facebook.com/your_facebook_page');
                                   },
                                   child: Image.asset(
                                     '../assets/img/logo_fb.png',
@@ -172,7 +159,8 @@ class _HalamanProfilState extends State<HalamanProfil>
                                 const SizedBox(width: 20),
                                 InkWell(
                                   onTap: () {
-                                    _launchURL('https://www.instagram.com/your_instagram_page');
+                                    _launchURL(
+                                        'https://www.instagram.com/your_instagram_page');
                                   },
                                   child: Image.asset(
                                     '../assets/img/logo_instagram.png',
@@ -183,7 +171,8 @@ class _HalamanProfilState extends State<HalamanProfil>
                                 const SizedBox(width: 20),
                                 InkWell(
                                   onTap: () {
-                                    _launchURL('https://www.github.com/your_github_page');
+                                    _launchURL(
+                                        'https://www.github.com/your_github_page');
                                   },
                                   child: Image.asset(
                                     '../assets/img/logo_github.png',
